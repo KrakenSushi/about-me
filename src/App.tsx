@@ -25,7 +25,7 @@ import {
 import DotGrid from "./DotGrid";
 
 export default function App() {
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const tags = [
     "HTML",
