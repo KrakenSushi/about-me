@@ -14,6 +14,7 @@ import {
   TimelinePoint,
   TimelineTime,
   TimelineTitle,
+  Tooltip,
 } from "flowbite-react";
 
 import {
@@ -249,8 +250,8 @@ export default function App() {
           </div>
 
           {/* Hero Image */}
-          <div className="hidden lg:col-span-5 lg:mt-0 lg:flex">
-            <img src="img/me_bgremoved.png" alt="Ardy" />
+          <div className="right-0 hidden lg:col-span-5 lg:mt-0 lg:flex">
+            <img src="img/me_bgremoved-1.png" alt="Ardy" />
           </div>
         </div>
       </div>
@@ -351,21 +352,23 @@ export default function App() {
                 You may reach me through these channels
               </p>
             </h1>
-            <div className="grid w-full grid-cols-3 gap-6 sm:grid-cols-3 md:grid-cols-6">
+
+            {/* Change grid to flex row */}
+            <div className="flex flex-wrap justify-center gap-6">
               {contacts.map((contact, index) => (
-                <a
-                  key={index}
-                  href={contact.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center rounded-xl border border-gray-200 bg-white p-5 text-gray-900 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
-                >
-                  {/* Wrap the SVG in a div and set size + color via Tailwind */}
-                  <div
-                    className="h-8 w-8 fill-current text-gray-900 dark:text-gray-100"
-                    dangerouslySetInnerHTML={{ __html: contact.icon }}
-                  />
-                </a>
+                <Tooltip key={index} content={contact.label} placement="top">
+                  <a
+                    href={contact.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center rounded-3xl border border-gray-200 bg-gray-100 p-5 text-gray-900 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100"
+                  >
+                    <div
+                      className="h-8 w-8 fill-current text-gray-900 dark:text-gray-100"
+                      dangerouslySetInnerHTML={{ __html: contact.icon }}
+                    />
+                  </a>
+                </Tooltip>
               ))}
             </div>
           </div>
