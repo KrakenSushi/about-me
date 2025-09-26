@@ -259,7 +259,7 @@ export default function App() {
             <a
               href="CV.pdf"
               download
-              className="mb-20 inline-flex items-center justify-center rounded-lg border border-gray-300 bg-gray-100 px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-none dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+              className="mb-20 inline-flex items-center justify-center rounded-lg border border-gray-300 bg-gray-100 px-5 py-3 text-center text-base font-medium text-gray-900 transition duration-200 ease-in-out hover:scale-110 hover:bg-gray-300 hover:outline-1 hover:outline-gray-400 focus:ring-4 focus:ring-gray-400 dark:border-none dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600 dark:hover:outline-blue-400 dark:focus:ring-blue-600"
             >
               Download CV
               <Paperclip className="-mr-1 ml-2 h-5 w-5" />
@@ -300,7 +300,7 @@ export default function App() {
               {projects.map((project, index) => (
                 <div
                   key={index}
-                  className="flex flex-col rounded-xl border border-gray-200 p-5 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-700"
+                  className="flex flex-col rounded-xl border border-gray-200 p-5 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:outline-1 hover:outline-blue-300 dark:border-gray-700 dark:bg-gray-700 dark:hover:outline-blue-400"
                 >
                   {project.image && (
                     <img
@@ -393,7 +393,7 @@ export default function App() {
                     href={contact.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center rounded-3xl border border-gray-200 bg-gray-100 p-5 text-gray-900 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100"
+                    className="flex items-center justify-center rounded-3xl border border-gray-200 bg-gray-100 p-5 text-gray-900 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:outline-blue-400 dark:focus:ring-blue-600"
                   >
                     <div
                       className="h-8 w-8 fill-current text-gray-900 dark:text-gray-100"
@@ -407,7 +407,7 @@ export default function App() {
               <a
                 href="CV.pdf"
                 download
-                className="mb-20 inline-flex items-center justify-center rounded-lg border border-gray-300 bg-gray-100 px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-none dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                className="mb-20 inline-flex items-center justify-center rounded-lg border border-gray-300 bg-gray-100 px-5 py-3 text-center text-base font-medium text-gray-900 transition duration-200 ease-in-out hover:scale-110 hover:bg-gray-300 hover:outline-1 hover:outline-gray-400 focus:ring-4 focus:ring-gray-400 dark:border-none dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:outline-blue-400 dark:focus:ring-blue-600"
               >
                 Download CV
                 <Paperclip className="-mr-1 ml-2 h-5 w-5" />
@@ -416,22 +416,6 @@ export default function App() {
           </div>
         </Card>
       </section>
-      {/* {showScrollTop && (
-        <Tooltip
-          content="Back to top"
-          placement="top"
-          trigger="hover"
-          inline={true}
-        >
-          <button
-            onClick={scrollToTop}
-            className="fixed right-6 bottom-6 z-50 rounded-full bg-slate-500 p-3 text-white shadow-lg transition hover:bg-blue-300 dark:bg-blue-800 dark:hover:bg-blue-600"
-          >
-            <ArrowUp className="h-8 w-8" />
-          </button>
-        </Tooltip>
-      )} */}
-
       {showScrollTop && (
         <div className="fixed right-6 bottom-6 z-50">
           <Tooltip content="Back to top" placement="left" trigger="hover">
