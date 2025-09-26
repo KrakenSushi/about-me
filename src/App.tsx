@@ -190,8 +190,8 @@ export default function App() {
               <NavbarLink className="text-lg font-semibold" href="#contact">
                 Contact
               </NavbarLink>
+              <DarkThemeToggle className="p-0" />
             </NavbarCollapse>
-            <DarkThemeToggle />
           </Navbar>
         </div>
       </section>
@@ -250,7 +250,7 @@ export default function App() {
           </div>
 
           {/* Hero Image */}
-          <div className="right-0 hidden lg:col-span-5 lg:mt-0 lg:flex">
+          <div className="right-0 hidden justify-end lg:col-span-5 lg:mt-0 lg:flex">
             <img src="img/me_bgremoved-1.png" alt="Ardy" />
           </div>
         </div>
