@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   DarkThemeToggle,
@@ -22,11 +22,13 @@ import {
   Paperclip,
   GraduationCap,
   Backpack,
+  ArrowUp,
 } from "lucide-react";
 import DotGrid from "./DotGrid";
 
 export default function App() {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const tags = [
     "HTML",
@@ -115,7 +117,7 @@ export default function App() {
       company: "Central Luzon State University",
       icon: GraduationCap,
       description:
-        "Earned a Bachelor of Science in Information Technology, majoring in Systems Development, with a GPA of 1.67, demonstrating strong proficiency in software development concepts and hands-on experience in both front-end and back-end technologies.",
+        "Earned a Bachelor of Science in Information Technology, majoring in Systems Development, with a GPA of 1.65, demonstrating strong proficiency in software development concepts and hands-on experience in both front-end and back-end technologies.",
     },
     {
       date: "August 2023 - February 2024",
@@ -160,6 +162,28 @@ export default function App() {
     },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = scrollTop / docHeight;
+
+      if (scrolled > 0.35) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gray-200/90 px-0 pt-20 dark:bg-gray-700/80">
       {/* Navbar */}
@@ -190,7 +214,12 @@ export default function App() {
               <NavbarLink className="text-lg font-semibold" href="#contact">
                 Contact
               </NavbarLink>
-              <DarkThemeToggle className="p-0" />
+              <div className="flex items-center justify-start gap-2 text-gray-700 hover:text-blue-600 dark:text-gray-400">
+                <span className="inline pt-2 pb-1 pl-3 text-lg font-semibold lg:hidden">
+                  Toggle theme
+                </span>
+                <DarkThemeToggle className="block p-0" />
+              </div>
             </NavbarCollapse>
           </Navbar>
         </div>
@@ -261,7 +290,7 @@ export default function App() {
         {/* Projects */}
         <Card
           id="projects"
-          className="relative mt-24 w-full max-w-7xl rounded-3xl border-0 p-10 shadow-2xl backdrop-blur"
+          className="relative mt-24 w-full max-w-7xl rounded-3xl border-0 py-5 shadow-2xl backdrop-blur lg:p-10"
         >
           <div className="flex w-full flex-col items-center justify-center gap-12">
             <h1 className="text-center text-4xl font-bold text-gray-900 dark:text-gray-200">
@@ -271,7 +300,7 @@ export default function App() {
               {projects.map((project, index) => (
                 <div
                   key={index}
-                  className="flex flex-col rounded-xl border border-gray-200 bg-white p-5 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
+                  className="flex flex-col rounded-xl border border-gray-200 p-5 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-700"
                 >
                   {project.image && (
                     <img
@@ -290,7 +319,8 @@ export default function App() {
                   <p className="mb-4 text-gray-700 dark:text-gray-300">
                     {project.role}
                   </p>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <hr className="py-3 text-gray-300 dark:text-gray-400" />
+                  <p className="mt-0 pt-0 text-gray-600 dark:text-gray-400">
                     {project.description}
                   </p>
                 </div>
@@ -328,11 +358,13 @@ export default function App() {
                   <TimelinePoint icon={exp.icon} />
                   <TimelineContent>
                     <TimelineTime>{exp.date}</TimelineTime>
+                    {/* <div className="w-full rounded px-5 dark:bg-gray-600"> */}
                     <TimelineTitle>{exp.title}</TimelineTitle>
                     <TimelineBody className="text-sm">
                       {exp.company}
                     </TimelineBody>
                     <TimelineBody>{exp.description}</TimelineBody>
+                    {/* </div> */}
                   </TimelineContent>
                 </TimelineItem>
               ))}
@@ -371,9 +403,49 @@ export default function App() {
                 </Tooltip>
               ))}
             </div>
+            <div className="m-0 flex w-full justify-center p-0">
+              <a
+                href="CV.pdf"
+                download
+                className="mb-20 inline-flex items-center justify-center rounded-lg border border-gray-300 bg-gray-100 px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-none dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+              >
+                Download CV
+                <Paperclip className="-mr-1 ml-2 h-5 w-5" />
+              </a>
+            </div>
           </div>
         </Card>
       </section>
+      {/* {showScrollTop && (
+        <Tooltip
+          content="Back to top"
+          placement="top"
+          trigger="hover"
+          inline={true}
+        >
+          <button
+            onClick={scrollToTop}
+            className="fixed right-6 bottom-6 z-50 rounded-full bg-slate-500 p-3 text-white shadow-lg transition hover:bg-blue-300 dark:bg-blue-800 dark:hover:bg-blue-600"
+          >
+            <ArrowUp className="h-8 w-8" />
+          </button>
+        </Tooltip>
+      )} */}
+
+      {showScrollTop && (
+        <div className="fixed right-6 bottom-6 z-50">
+          <Tooltip content="Back to top" placement="left" trigger="hover">
+            <span className="inline-block">
+              <button
+                onClick={scrollToTop}
+                className="rounded-full bg-slate-500 p-3 text-white shadow-lg transition hover:bg-blue-300 dark:bg-blue-800 dark:hover:bg-blue-600"
+              >
+                <ArrowUp className="h-8 w-8" />
+              </button>
+            </span>
+          </Tooltip>
+        </div>
+      )}
     </main>
   );
 }
